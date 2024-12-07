@@ -17,6 +17,7 @@ app.use(loggingMiddleware);
 
 app.use(express.json());
 app.use('/api', productosRoutes);
+
 app.get('/api/test', (req, res) => {
     res.send('La aplicación está funcionando correctamente');
 });
