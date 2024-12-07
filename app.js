@@ -1,3 +1,7 @@
+console.log('Aplicación iniciando...');
+require('dotenv').config();
+
+
 const express = require(`express`);
 
 const app = express();
@@ -12,15 +16,16 @@ const loggingMiddleware = require('./middlewares/loggingMiddleware');
 app.use(loggingMiddleware);
 
 app.use(express.json());
-app.use(productosRoutes);
+app.use('/api', productosRoutes);
+app.get('/api/test', (req, res) => {
+    res.send('La aplicación está funcionando correctamente');
+});
 
 dbconnect().then(() => {
-    app.listen(3000, () => {
-        console.log("El servidor esta corriendo en el puerto 3000");
-    });
+    console.log("El servidor está corriendo.");
 
 }).catch(err => {
     console.log("No se pudo iniciar el servidor debido a un error en la base de datos");
 });
 
-
+module.exports = app; 

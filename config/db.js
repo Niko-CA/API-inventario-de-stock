@@ -2,7 +2,8 @@ const mongoose = require(`mongoose`);
 
 const dbconnect = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/dbInventarioStock');
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("URI:", process.env.MONGO_URI);
         console.log('Conexion a la base de datos fue exitosa');
     } catch (error) {
         console.error('Error en la conexion a la base de datos', error);
